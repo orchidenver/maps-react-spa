@@ -1,0 +1,37 @@
+{
+  "cities": [
+    {
+      "cityName": "Amsterdam",
+      "country": "Netherlands (the)",
+      "date": "2018-09-10T21:00:00.000Z",
+      "notes": "I have been to this city three time and the last one was with my current wife. What a lovely trip it was.",
+      "position": {
+        "lat": 52.3709879000206,
+        "lng": 4.893379211425781
+      },
+      "id": 1
+    },
+    {
+      "cityName": "Vienna",
+      "country": "Austria",
+      "date": "2019-09-02T21:00:00.000Z",
+      "notes": "Hate this city and that trip. Worst experience EVER.",
+      "position": {
+        "lat": 48.20545609897652,
+        "lng": 16.373062133789066
+      },
+      "id": 2
+    },
+    {
+      "cityName": "Lviv",
+      "country": "Ukraine",
+      "date": "2021-08-21T21:00:00.000Z",
+      "notes": "Lovely trip. The city where I proposed my wife.",
+      "position": {
+        "lat": 49.84063949718989,
+        "lng": 24.03121948242188
+      },
+      "id": 3
+    }
+  ]
+}

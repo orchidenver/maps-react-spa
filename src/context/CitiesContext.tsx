@@ -7,14 +7,14 @@ import {
   Reducer,
 } from "react";
 import {
-  CitiesProviderInterface,
+  ProviderInterface,
   City,
   CitiesContextInterface,
   InitialStateInterface,
   Actions,
   ActionTypes,
 } from "../types";
-import { reducer } from "../reducers";
+import { reducer } from "../reducers/CitiesReducer";
 import { Params } from "react-router-dom";
 
 const initialContext: CitiesContextInterface = {
@@ -57,7 +57,7 @@ const initialState: InitialStateInterface = {
   error: "",
 };
 
-export function CitiesProvider({ children }: CitiesProviderInterface) {
+export function CitiesProvider({ children }: ProviderInterface) {
   const [{ cities, isLoading, currentCity }, dispatch] = useReducer<
     Reducer<InitialStateInterface, ActionTypes>
   >(reducer, initialState);

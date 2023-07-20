@@ -49,7 +49,7 @@ export interface CitiesContextInterface extends InitialStateInterface {
   removeCity: (id: number | undefined) => void;
 }
 
-export interface CitiesProviderInterface {
+export interface ProviderInterface {
   children: JSX.Element;
 }
 
@@ -120,4 +120,35 @@ export type ActionTypes =
   | {
       type: Actions.REJECTED;
       payload: string;
+    };
+
+export interface User {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+}
+
+export interface InitialAuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+}
+
+export interface InitialAuthContext extends InitialAuthState {
+  login: (email: string, password: string) => void;
+  logout: () => void;
+}
+
+export enum AuthActions {
+  LOGIN = "login",
+  LOGOUT = "logout",
+}
+
+export type AuthActionTypes =
+  | {
+      type: AuthActions.LOGOUT;
+    }
+  | {
+      type: AuthActions.LOGIN;
+      payload: User | null;
     };

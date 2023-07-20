@@ -4,6 +4,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { CitiesProvider } from "./context/CitiesContext";
+import { AuthProvider } from "./context/AuthContext";
 import HomePage from "./pages/HomePage";
 import PricingPage from "./pages/PricingPage";
 import ProductPage from "./pages/ProductPage";
@@ -15,6 +16,7 @@ import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import City from "./components/City";
 import Form from "./components/Form";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +34,11 @@ const router = createBrowserRouter([
   },
   {
     path: "app",
-    element: <AppLayoutPage />,
+    element: (
+      <ProtectedRoute>
+        <AppLayoutPage />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, element: <Navigate replace to="cities" /> },
       {
@@ -65,9 +71,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <CitiesProvider>
-      <RouterProvider router={router} />
-    </CitiesProvider>
+    <AuthProvider>
+      <CitiesProvider>
+        <RouterProvider router={router} />
+      </CitiesProvider>
+    </AuthProvider>
   );
 }
 

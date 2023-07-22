@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   createBrowserRouter,
   Navigate,
@@ -5,38 +6,59 @@ import {
 } from "react-router-dom";
 import { CitiesProvider } from "./context/CitiesContext";
 import { AuthProvider } from "./context/AuthContext";
-import HomePage from "./pages/HomePage";
-import PricingPage from "./pages/PricingPage";
-import ProductPage from "./pages/ProductPage";
-import Page404 from "./pages/Page404";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import PageNav from "./components/PageNav";
-import AppLayoutPage from "./pages/AppLayoutPage";
-import Login from "./pages/Login";
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import City from "./components/City";
 import Form from "./components/Form";
-import ProtectedRoute from "./components/ProtectedRoute";
+import SpinnerFullPage from "./components/SpinnerFullPage";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const PricingPage = lazy(() => import("./pages/PricingPage"));
+const ProductPage = lazy(() => import("./pages/ProductPage"));
+const Page404 = lazy(() => import("./pages/Page404"));
+const AppLayoutPage = lazy(() => import("./pages/AppLayoutPage"));
+const Login = lazy(() => import("./pages/Login"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
-    errorElement: <Page404 />,
+    element: (
+      <Suspense fallback={<SpinnerFullPage />}>
+        <HomePage />
+      </Suspense>
+    ),
+    errorElement: (
+      <Suspense fallback={<SpinnerFullPage />}>
+        <Page404 />
+      </Suspense>
+    ),
   },
   {
     path: "pricing",
-    element: <PricingPage />,
+    element: (
+      <Suspense fallback={<SpinnerFullPage />}>
+        <PricingPage />
+      </Suspense>
+    ),
   },
   {
     path: "product",
-    element: <ProductPage />,
+    element: (
+      <Suspense fallback={<SpinnerFullPage />}>
+        <ProductPage />
+      </Suspense>
+    ),
   },
   {
     path: "app",
     element: (
       <ProtectedRoute>
-        <AppLayoutPage />
+        <Suspense fallback={<SpinnerFullPage />}>
+          <AppLayoutPage />
+        </Suspense>
       </ProtectedRoute>
     ),
     children: [
@@ -61,7 +83,11 @@ const router = createBrowserRouter([
   },
   {
     path: "login",
-    element: <Login />,
+    element: (
+      <Suspense fallback={<SpinnerFullPage />}>
+        <Login />
+      </Suspense>
+    ),
   },
   {
     path: "*",

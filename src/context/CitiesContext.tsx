@@ -5,6 +5,7 @@ import {
   useContext,
   useReducer,
   Reducer,
+  useCallback,
 } from "react";
 import {
   ProviderInterface,
@@ -81,7 +82,9 @@ export function CitiesProvider({ children }: ProviderInterface) {
     void fetchCities();
   }, []);
 
-  async function fetchCurrentCity(id: Readonly<Params<string>>): Promise<void> {
+  const fetchCurrentCity = useCallback(async function fetchCurrentCity(
+    id: Readonly<Params<string>>
+  ): Promise<void> {
     try {
       if (id.id === undefined) throw new Error("Wrong city identification");
       dispatch({ type: Actions.LOADING });
@@ -95,7 +98,8 @@ export function CitiesProvider({ children }: ProviderInterface) {
       });
       alert("There was an error when loading the city");
     }
-  }
+  },
+  []);
 
   async function createNewCity(newCity: City): Promise<void> {
     dispatch({ type: Actions.LOADING });
